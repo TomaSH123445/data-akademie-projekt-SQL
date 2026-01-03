@@ -53,11 +53,16 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 
 ## Informace o výstupních datech a chybějících hodnotách
 
-- V **primární tabulce** jsou zahrnuty pouze *roky, pro které existují jak mzdy, tak ceny mléka i chleba*. Pokud některý rok chybí v cenách dané potraviny, vypadne z výsledné tabulky.  
-- První rok časové řady u mezd a cen nemá definovaný meziroční růst (YoY), což je přirozené – pro výpočet je potřeba předchozí rok.  
-- V některých odvětvích mohou chybět hodnoty mezd v konkrétním roce; při agregaci po odvětvích je to vidět jako absence dané kombinace `industry_code` + `year`.  
-- V **sekundární tabulce** nemusí mít všechny státy data pro všechna léta (např. chybějící HDP pro starší roky). V těchto letech je `gdp_yoy_pct` NULL, protože není k dispozici „předchozí rok“ pro výpočet růstu.  
-- Analýza „nejpomaleji zdražující kategorie“ využívá přímo tabulky `czechia_price` + `czechia_price_category`, protože rozpad na kategorie potravin by byl pro výsledné tabulky příliš detailní.
+**Primární tabulka**
+
+Primární tabulka obsahuje údaje o **průměrných mzdách** a **cenách potravin** podle roku a odvětví.
+
+- Údaje o cenách potravin (průměrná cena potravin, cena mléka, cena chleba a odvozené množstevní ukazatele – litry mléka a kilogramy chleba) jsou dostupné pouze v období **2006–2018**.
+
+**Sekundární tabulka**
+
+- Údaje o HDP nejsou dostupné pro všechny roky sledovaného období.
+- Giniho koeficient je k dispozici pouze pro vybrané roky a netvoří souvislou časovou řadu ve všech státech.
 
 ## Výzkumné otázky – slovní odpovědi
 
