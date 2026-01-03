@@ -62,17 +62,17 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 ## Výzkumné otázky – slovní odpovědi
 
 ### Otázka 1  
-**„Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?“**  
+**Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?**  
 
 Z výstupu dotazu vidíme, že většina odvětví vykazuje v čase kladný meziroční růst mezd. Mzdy tedy dlouhodobě rostou. V několika málo letech se však objevují odvětví s mírným poklesem mezd (např. Vzdělávání/2010,2021 nebo Těžba a dobývání/2009,2013,2014,2016 ), což souvisí pravděpodobně s ekonomickými zpomaleními v těchto obdobích. Celkově lze říci, že trend mezd je rostoucí, ale rozhodně ne striktně monotonní. Některá odvětví v jednotlivých letech krátkodobě klesají.
 
 ### Otázka 2  
-**„Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období?“**  
+**Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období?**  
 
 Z tabulky `t_tomas_havelec_project_sql_primary_final` pro celkový průměr `ALL` vyplývá, že na začátku sledovaného období 2006 bylo možné za průměrnou mzdu koupit přibližně 1,432 litrů mléka a 1,282 kg chleba. Na konci období 2018 tato kupní síla vzrostla na zhruba 1,639 litrů mléka a 1,340 kg chleba. Kupní síla domácností u základních potravin se tedy v čase zvýšila, i když růst není u obou komodit nutně stejně rychlý.
 
 ### Otázka 3  
-**„Která kategorie potravin zdražuje nejpomaleji?“**  
+**Která kategorie potravin zdražuje nejpomaleji?**  
 
 Analýza ročních průměrných cen podle kategorií ukazuje, že nejpomaleji zdražující kategorií je krystalový cukr, který má nejnižší průměrný meziroční růst cen v procentech. To znamená, že její cena rostla v čase stabilněji a méně dynamicky než u ostatních potravin. Ostatní kategorie vykazují výrazně vyšší průměrné tempo zdražování.
 
@@ -82,9 +82,9 @@ Analýza ročních průměrných cen podle kategorií ukazuje, že nejpomaleji z
 Výsledek dotazu srovnávající meziroční růst průměrné mzdy a růst průměrných cen potravin ukazuje, že takové roky neexistují
 
 ### Otázka 5  
-**„Má výška HDP vliv na změny ve mzdách a cenách potravin?“**  
+**Má výška HDP vliv na změny ve mzdách a cenách potravin?**  
 
-Při pohledu na meziroční růst HDP a meziroční růst mezd a cen potravin v ČR je vidět, že mezi růstem HDP a růstem mezd existuje určité pozitivní propojení – v letech s rychlejším růstem HDP mají většinou tendenci růst i mzdy rychleji. U cen potravin je vazba na HDP slabší, protože jsou ovlivněny i dalšími faktory (např. světové ceny komodit, kurz koruny, dopravní a energetické náklady). Celkově lze říci, že HDP má viditelnější vliv na mzdy než přímo na ceny potravin.
+Po provedené analýzy nevyplývá jednoznačný přímý vztah mezi výší ani meziročním růstem HDP a okamžitými změnami mezd či cen potravin. U mezd lze pozorovat pouze slabou vazbu, která se může projevit se zpožděním, zatímco u cen potravin se vliv HDP nepotvrdil.
 
 
 ## Jak skripty používat
