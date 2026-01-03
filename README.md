@@ -59,7 +59,7 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 
 **Sekundární tabulka**
 
-- Údaje o HDP nejsou dostupné pro všechny roky sledovaného období.
+- Údaje o HDP nejsou dostupné pro všechny roky. Toto může být způsobeno doposud neuznanou suverenitou (existencí) státu.
 - Giniho koeficient je k dispozici pouze pro vybrané roky a netvoří souvislou časovou řadu ve všech státech.
 
 ## Výzkumné otázky – slovní odpovědi
