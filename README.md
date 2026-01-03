@@ -64,7 +64,7 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 ### Otázka 1  
 **„Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?“**  
 
-Z výstupu dotazu vidíme, že většina odvětví vykazuje v čase kladný meziroční růst mezd; mzdy tedy dlouhodobě rostou. V několika málo letech se však objevují odvětví s mírným poklesem mezd (např. `[doplnit odvětví/roky]`), což souvisí pravděpodobně s ekonomickými zpomaleními v těchto obdobích. Celkově lze říci, že trend mezd je rostoucí, ale rozhodně ne striktně monotonní – některá odvětví v jednotlivých letech krátkodobě klesají.
+Z výstupu dotazu vidíme, že většina odvětví vykazuje v čase kladný meziroční růst mezd. Mzdy tedy dlouhodobě rostou. V několika málo letech se však objevují odvětví s mírným poklesem mezd (např. Vzdělávání/2010,2021 nebo Těžba a dobývání/2009,2013,2014,2016 ), což souvisí pravděpodobně s ekonomickými zpomaleními v těchto obdobích. Celkově lze říci, že trend mezd je rostoucí, ale rozhodně ne striktně monotonní. Některá odvětví v jednotlivých letech krátkodobě klesají.
 
 ### Otázka 2  
 **„Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období?“**  
@@ -74,12 +74,12 @@ Z tabulky `t_tomas_havelec_project_sql_primary_final` pro celkový průměr `ALL
 ### Otázka 3  
 **„Která kategorie potravin zdražuje nejpomaleji?“**  
 
-Analýza ročních průměrných cen podle kategorií ukazuje, že nejpomaleji zdražující kategorií je krystalový cukr, který má nejnižší průměrný meziroční růst cen v procentech. To znamená, že její cena rostla v čase stabilněji a méně dynamicky než u ostatních potravin, a z hlediska dlouhodobé inflace byla pro spotřebitele relativně „bezpečnější“. Ostatní kategorie vykazují výrazně vyšší průměrné tempo zdražování, případně větší výkyvy v jednotlivých letech.
+Analýza ročních průměrných cen podle kategorií ukazuje, že nejpomaleji zdražující kategorií je krystalový cukr, který má nejnižší průměrný meziroční růst cen v procentech. To znamená, že její cena rostla v čase stabilněji a méně dynamicky než u ostatních potravin. Ostatní kategorie vykazují výrazně vyšší průměrné tempo zdražování.
 
 ### Otázka 4  
 **„Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (o více než 10 p. b.)?“**  
 
-Výsledek dotazu srovnávající meziroční růst průměrné mzdy a růst průměrných cen potravin ukazuje, že takové roky skutečně existují – například `[doplnit roky]`. V těchto letech rostly ceny potravin o více než 10 procentních bodů rychleji než mzdy, což znamená výrazné zhoršení reálné kupní síly domácností. Lze tedy říci, že inflace potravin v těchto obdobích krátkodobě „utekla“ růstu mezd.
+Výsledek dotazu srovnávající meziroční růst průměrné mzdy a růst průměrných cen potravin ukazuje, že takové roky neexistují
 
 ### Otázka 5  
 **„Má výška HDP vliv na změny ve mzdách a cenách potravin?“**  
