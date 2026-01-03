@@ -39,8 +39,6 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 
 **Zdroj:** `economies` + `countries` (Evropa)
 
-**Granularita:** stát × rok
-
 **Sloupce:**
 
 - `country` – název státu  
