@@ -55,9 +55,7 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 
 **Primární tabulka**
 
-Primární tabulka obsahuje údaje o **průměrných mzdách** a **cenách potravin** podle roku a odvětví.
-
-- Údaje o cenách potravin (průměrná cena potravin, cena mléka, cena chleba a odvozené množstevní ukazatele – litry mléka a kilogramy chleba) jsou dostupné pouze v období **2006–2018**.
+- Údaje o cenách potravin jsou dostupné pouze v období **2006–2018**.
 
 **Sekundární tabulka**
 
