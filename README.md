@@ -5,7 +5,7 @@
 
 ## Cíl projektu
 
-Cílem tohoto projektu je připravit robustní analytický datový podklad umožňující objektivně posoudit vývoj dostupnosti základních potravin v České republice na základě průměrných příjmů obyvatel v čase. Analýza se zaměřuje na porovnání vývoje mezd a cen vybraných potravin v jednotném, časově porovnatelném období a na identifikaci dlouhodobých trendů v jejich dostupnosti. Součástí projektu je také vytvoření doplňkové datové tabulky zahrnující vybrané evropské státy, která obsahuje ukazatele HDP, Giniho koeficientu a velikosti populace ve stejném časovém období. Tento přehled slouží k zasazení výsledků za Českou republiku do širšího evropského kontextu a **odpovídá na pět výzkumných otázek** týkajících se vývoje mezd, cen potravin, kupní síly a možného vztahu k vývoji HDP v České republice a dalších evropských státech.  .
+Cílem tohoto projektu je připravit robustní analytický datový podklad umožňující objektivně posoudit vývoj dostupnosti základních potravin v České republice na základě průměrných příjmů obyvatel v čase. Analýza se zaměřuje na porovnání vývoje mezd a cen vybraných potravin v jednotném, časově porovnatelném období a na identifikaci dlouhodobých trendů v jejich dostupnosti. Součástí projektu je také vytvoření doplňkové datové tabulky zahrnující vybrané evropské státy, která obsahuje ukazatele HDP, Giniho koeficientu a velikosti populace ve stejném časovém období. Tento přehled slouží k zasazení výsledků za Českou republiku do širšího evropského kontextu a **odpovídá na pět výzkumných otázek** týkajících se vývoje mezd, cen potravin, kupní síly a možného vztahu k vývoji HDP v České republice a dalších evropských státech.
 
 K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické dotazy:
 
