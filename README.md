@@ -67,7 +67,7 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 ### Otázka 1  
 **Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?**  
 
-Z výstupu dotazu vidíme, že většina odvětví vykazuje v čase kladný meziroční růst mezd. Mzdy tedy dlouhodobě rostou. V několika málo letech se však objevují odvětví s mírným poklesem mezd (např. Vzdělávání/2010,2021 nebo Těžba a dobývání/2009,2013,2014,2016 ), což souvisí pravděpodobně s ekonomickými zpomaleními v těchto obdobích. Celkově lze říci, že trend mezd je rostoucí, ale rozhodně ne striktně monotonní. Některá odvětví v jednotlivých letech krátkodobě klesají.
+Z výstupu dotazu vidíme, že většina odvětví vykazuje v čase kladný meziroční růst mezd. Mzdy tedy dlouhodobě rostou. V několika málo letech se však objevují odvětví s mírným poklesem mezd (např. Vzdělávání/2010 nebo Těžba a dobývání/2009,2013,2014,2016 ), což souvisí pravděpodobně s ekonomickými zpomaleními v těchto obdobích. Celkově lze říci, že trend mezd je rostoucí, ale rozhodně ne striktně monotonní. Některá odvětví v jednotlivých letech krátkodobě klesají.
 
 ### Otázka 2  
 **Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období?**  
