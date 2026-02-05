@@ -59,8 +59,7 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 **Sekundární tabulka**
 
 - Sekundární tabulka pokrývá 45 evropských států v období 2006–2018 (13 let).
-- Počet řádků je 585 (45×13) ⇒ data jsou kompletní pro každý stát a rok v daném období.
-- gdp_yoy_pct je NULL v prvním roce každé země (nelze spočítat bez předchozího roku)
+- Počet řádků je 585 (45×13) ⇒ data nejsou uplně kompletní pro každý stát a rok v daném období.
 
 ## Výzkumné otázky – slovní odpovědi
 
@@ -77,17 +76,17 @@ Z tabulky `t_tomas_havelec_project_sql_primary_final` pro celkový průměr `ALL
 ### Otázka 3  
 **Která kategorie potravin zdražuje nejpomaleji?**  
 
-Analýza ročních průměrných cen podle kategorií ukazuje, že nejpomaleji zdražující kategorií je krystalový cukr, který má nejnižší průměrný meziroční růst cen v procentech (1,92%). To znamená, že její cena rostla v čase stabilněji a méně dynamicky než u ostatních potravin. Ostatní kategorie vykazují výrazně vyšší průměrné tempo zdražování.
+Analýza ročních průměrných cen podle kategorií ukazuje, že nejpomaleji zdražující kategorií je krystalový cukr, který má nejnižší průměrný meziroční růst cen v procentech (-1,92%). To znamená, že její cena rostla v čase stabilněji a méně dynamicky než u ostatních potravin. Ostatní kategorie vykazují výrazně vyšší průměrné tempo zdražování.
 
 ### Otázka 4  
 **Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (o více než 10 p. b.)?**  
 
-Výsledek dotazu srovnávající meziroční růst průměrné mzdy a růst průměrných cen potravin ukazuje, že takové roky neexistují
+Výsledek dotazu srovnávající meziroční růst průměrné mzdy a růst průměrných cen potravin ukazuje, že takové roky neexistují.
 
 ### Otázka 5  
 **Má výška HDP vliv na změny ve mzdách a cenách potravin?**  
 
-Po provedené analýzy nevyplývá jednoznačný přímý vztah mezi výší ani meziročním růstem HDP a okamžitými změnami mezd či cen potravin. U mezd lze pozorovat pouze slabou vazbu, která se může projevit se zpožděním, zatímco u cen potravin se vliv HDP nepotvrdil.
+V datech není vidět stabilní a jednoznačný vztah mezi růstem HDP a růstem mezd či cen potravin ani ve stejném roce, ani v roce následujícím. Např. v roce 2009 HDP výrazně kleslo (-4,66 %), ale mzdy dál rostly (+3,07 %) a ceny potravin naopak klesly (-6,41 %). Naopak v roce 2015 při silném růstu HDP (+5,39 %) ceny potravin klesaly (-0,55 %) a mzdy rostly jen mírně (+2,6 %). Celkově to spíš ukazuje, že mzdy i ceny potravin ovlivňují i jiné faktory než samotné HDP.
 
 
 ## Jak skripty používat
