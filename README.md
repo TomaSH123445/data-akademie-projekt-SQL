@@ -20,35 +20,35 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 
 ## Popis výsledných tabulek
 
-### 1. `t_tomas_havelec_project_sql_primary_final`
+## 1. `t_tomas_havelec_project_sql_primary_final`
 
-**Zdroj:** `czechia_payroll` + `czechia_price`  
+**Zdroj:** `czechia_payroll` + `czechia_price`
 
 **Sloupce:**
+- `year` – kalendářní rok (společné roky mezd a cen)
+- `industry_branch_code` – kód odvětví (nebo `ALL` pro celkový průměr)
+- `industry_branch_name` – název odvětví
+- `avg_wage_czk` – průměrná mzda (v Kč) pro dané odvětví a rok
+- `category_code` – kód kategorie potraviny
+- `category_name` – název kategorie potraviny
+- `price_value` – množství jednotky v ceníku (např. 1, 0.5, 150…)
+- `price_unit` – jednotka množství (např. `kg`, `l`, `g`, `ks`)
+- `avg_price_czk` – průměrná cena potraviny (v Kč) pro daný rok (celá ČR)
+- `units_affordable_for_avg_wage` – kolik jednotek dané potraviny lze koupit za průměrnou mzdu (`avg_wage_czk / avg_price_czk`)
 
-- `year` – kalendářní rok  
-- `industry_code` – kód odvětví (nebo `ALL` pro celkový průměr)  
-- `industry_name` – název odvětví  
-- `avg_wage` – průměrná hrubá mzda na zaměstnance v daném odvětví a roce  
-- `avg_food_price` – nevážený průměr cen všech potravin v daném roce  
-- `milk_price` – průměrná cena litru mléka  
-- `bread_price` – průměrná cena kilogramu chleba  
-- `liters_milk` – kolik litrů mléka lze koupit za průměrnou mzdu  
-- `kg_bread` – kolik kilogramů chleba lze koupit za průměrnou mzdu  
 
-### 2. `t_tomas_havelec_project_sql_secondary_final`
+## 2. `t_tomas_havelec_project_sql_secondary_final`
 
 **Zdroj:** `economies` + `countries` (Evropa)
 
 **Sloupce:**
-
-- `country` – název státu  
-- `year` – kalendářní rok  
-- `gdp` – hrubý domácí produkt  
-- `gini` – koeficient příjmové nerovnosti  
-- `population` – počet obyvatel  
-- `gdp_yoy_pct` – meziroční růst HDP v %  
-- `region`, `subregion` – geografická klasifikace v Evropě  
+- `country` – název státu
+- `year` – kalendářní rok (stejné období jako v primární tabulce)
+- `gdp` – hrubý domácí produkt (HDP)
+- `gini` – GINI koeficient (příjmová nerovnost)
+- `population` – počet obyvatel
+- `gdp_yoy_pct` – meziroční změna HDP v % (pro první rok dané země může být `NULL`, protože není předchozí rok pro výpočet)
+ 
 
 ## Informace o výstupních datech a chybějících hodnotách
 
