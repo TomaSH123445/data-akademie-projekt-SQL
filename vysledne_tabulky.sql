@@ -97,10 +97,6 @@ JOIN wages  w ON w.year = cy.year
 JOIN prices p ON p.year = cy.year
 ORDER BY cy.year, w.industry_branch_code, p.category_code;
 
-ALTER TABLE t_tomas_havelec_project_sql_primary_final
-  ADD PRIMARY KEY (year, industry_branch_code, category_code);
-
-
 -- 2) Sekundární tabulka
 CREATE TABLE t_tomas_havelec_project_sql_secondary_final AS
 WITH years AS (
