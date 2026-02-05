@@ -37,7 +37,7 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 - `units_affordable_for_avg_wage` – kolik jednotek dané potraviny lze koupit za průměrnou mzdu (`avg_wage_czk / avg_price_czk`)
 
 
-# 2. `t_tomas_havelec_project_sql_secondary_final`
+# 2.`t_tomas_havelec_project_sql_secondary_final`
 
 **Zdroj:** `economies` + `countries` (Evropa)
 
