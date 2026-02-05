@@ -54,12 +54,11 @@ K tomu jsou vytvořeny dvě výsledné tabulky, nad kterými běží analytické
 
 **Primární tabulka**
 
-- Údaje o cenách potravin jsou dostupné pouze v období **2006–2018**.
+Primární tabulka je sestavená pouze pro roky 2006–2018, protože právě v tomto období existují v datové sadě czechia_price dostupná a srovnatelná data. Czechia_payroll sice mohou obsahovat i jiné roky, ale mimo uvedené období by už nešlo korektně dělat společné porovnání mezd a cen potravin, proto jsou roky sjednocené na průnik dostupných dat.
 
 **Sekundární tabulka**
 
-- Sekundární tabulka pokrývá 45 evropských států v období 2006–2018 (13 let).
-- Počet řádků je 585 (45×13) ⇒ data nejsou uplně kompletní pro každý stát a rok v daném období.
+Sekundární tabulka má 585 řádků ( 45 zemí × 13 let, období 2006–2018). Kompletní jsou sloupce country, year a population, ale chybí část ekonomických ukazatelů: gdp je NULL v 37 záznamech, gini v 124 záznamech a gdp_yoy_pct v 39 záznamech (typicky u prvního dostupného roku nebo tam, kde chybí gdp pro výpočet meziroční změny). Z evropských entit se v tabulce vůbec nevyskytují Holy See, Northern Ireland a Svalbard and Jan Mayen, protože pro období 2006–2018 nemají v economies žádná data.
 
 ## Výzkumné otázky – slovní odpovědi
 
