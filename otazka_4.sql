@@ -1,16 +1,37 @@
--- Existuje rok, ve kterém byl růst cen potravin výrazně vyšší než růst mezd (více než o 10 %)?
-WITH rust AS (
-    SELECT 
-        rok,
-        ROUND((prumerna_mzda / LAG(prumerna_mzda) OVER (ORDER BY rok) - 1) * 100, 2) AS rust_mezd_procent,
-        ROUND((prumerna_cena_jidla / LAG(prumerna_cena_jidla) OVER (ORDER BY rok) - 1) * 100, 2) AS rust_cen_procent
+-- 4) Existuje rok, kdy meziroční nárůst cen potravin byl o >10 % vyšší než růst mezd?
+
+WITH mzdy AS (
+  SELECT year, MAX(avg_wage_czk) AS mzda
+  FROM t_tomas_havelec_project_sql_primary_final
+  WHERE industry_branch_code = 'ALL'
+  GROUP BY year
+),
+ceny_potravin AS (
+  SELECT year, AVG(avg_price_czk) AS cena_potravin
+  FROM (
+    SELECT year, category_code, MAX(avg_price_czk) AS avg_price_czk
     FROM t_tomas_havelec_project_sql_primary_final
+    WHERE industry_branch_code = 'ALL'
+    GROUP BY year, category_code
+  ) t
+  GROUP BY year
+),
+yoy AS (
+  SELECT
+    m.year,
+    ROUND((100 * (m.mzda / NULLIF(LAG(m.mzda) OVER (ORDER BY m.year), 0) - 1))::numeric, 2) AS rust_mezd_pct,
+    ROUND((100 * (c.cena_potravin / NULLIF(LAG(c.cena_potravin) OVER (ORDER BY c.year), 0) - 1))::numeric, 2) AS rust_cen_pct
+  FROM mzdy m
+  JOIN ceny_potravin c USING (year)
 )
-SELECT 
-    rok,
-    rust_mezd_procent,
-    rust_cen_procent,
-    (rust_cen_procent - rust_mezd_procent) AS rozdil_procent
-FROM rust
-WHERE (rust_cen_procent - rust_mezd_procent) < 10
-ORDER BY rozdil_procent DESC;
+SELECT
+  year,
+  rust_mezd_pct,
+  rust_cen_pct,
+  ROUND((rust_cen_pct - rust_mezd_pct)::numeric, 2) AS rozdil_pct_bodu
+FROM yoy
+WHERE rust_mezd_pct IS NOT NULL
+  AND rust_cen_pct IS NOT NULL
+  AND (rust_cen_pct - rust_mezd_pct) > 10
+ORDER BY rozdil_pct_bodu DESC, year;
+
