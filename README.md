@@ -72,12 +72,12 @@ Z výstupu dotazu vidíme, že většina odvětví vykazuje v čase kladný mezi
 ### Otázka 2  
 **Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období?**  
 
-Z tabulky `t_tomas_havelec_project_sql_primary_final` pro celkový průměr `ALL` vyplývá, že na začátku sledovaného období 2006 bylo možné za průměrnou mzdu koupit přibližně 1,432 litrů mléka a 1,282 kg chleba. Na konci období 2018 tato kupní síla vzrostla na zhruba 1,639 litrů mléka a 1,340 kg chleba. Kupní síla domácností u základních potravin se tedy v čase zvýšila, i když růst není u obou komodit nutně stejně rychlý.
+Z tabulky `t_tomas_havelec_project_sql_primary_final` pro celkový průměr `ALL` vyplývá, že na začátku sledovaného období 2006 bylo možné za průměrnou mzdu koupit přibližně 1,466 litrů mléka a 1,312 kg chleba. Na konci období 2018 tato kupní síla vzrostla na zhruba 1,670 litrů mléka a 1,365 kg chleba. Kupní síla domácností u základních potravin se tedy v čase zvýšila, i když růst není u obou komodit nutně stejně rychlý.
 
 ### Otázka 3  
 **Která kategorie potravin zdražuje nejpomaleji?**  
 
-Analýza ročních průměrných cen podle kategorií ukazuje, že nejpomaleji zdražující kategorií je krystalový cukr, který má nejnižší průměrný meziroční růst cen v procentech. To znamená, že její cena rostla v čase stabilněji a méně dynamicky než u ostatních potravin. Ostatní kategorie vykazují výrazně vyšší průměrné tempo zdražování.
+Analýza ročních průměrných cen podle kategorií ukazuje, že nejpomaleji zdražující kategorií je krystalový cukr, který má nejnižší průměrný meziroční růst cen v procentech (1,92%). To znamená, že její cena rostla v čase stabilněji a méně dynamicky než u ostatních potravin. Ostatní kategorie vykazují výrazně vyšší průměrné tempo zdražování.
 
 ### Otázka 4  
 **Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (o více než 10 p. b.)?**  
