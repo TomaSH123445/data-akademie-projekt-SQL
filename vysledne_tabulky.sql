@@ -4,105 +4,154 @@
 
 -- 1) Primární tabulka
 CREATE TABLE t_tomas_havelec_project_sql_primary_final AS
-WITH mzdy AS (
-  SELECT payroll_year AS rok, AVG(value::numeric) AS prumerna_mzda
-  FROM czechia_payroll cp
-  JOIN czechia_payroll_value_type vt ON cp.value_type_code = vt.code
-  JOIN czechia_payroll_unit u       ON cp.unit_code        = u.code
-  WHERE vt.code = 5958
-    AND u.code = 200
-  GROUP BY payroll_year
+WITH wage_type AS (e
+    SELECT vt.code AS value_type_code
+    FROM czechia_payroll cp
+    JOIN czechia_payroll_value_type vt ON vt.code = cp.value_type_code
+    WHERE cp.value IS NOT NULL
+      AND vt.name ILIKE '%mzda%'
+    GROUP BY vt.code
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
 ),
-mleko AS (
-  SELECT EXTRACT(YEAR FROM p.date_from)::int AS rok, AVG(p.value::numeric) AS cena_mlika
-  FROM czechia_price p
-  JOIN czechia_price_category c ON p.category_code = c.code
-  WHERE c.name ILIKE '%mléko%' 
-    AND c.price_unit ILIKE '%l%'
-  GROUP BY EXTRACT(YEAR FROM p.date_from)::int
+wage_unit_pref AS (
+    SELECT cp.unit_code
+    FROM czechia_payroll cp
+    JOIN czechia_payroll_unit u ON u.code = cp.unit_code
+    WHERE cp.value IS NOT NULL
+      AND cp.value_type_code = (SELECT value_type_code FROM wage_type)
+      AND u.name ILIKE '%Kč%'
+    GROUP BY cp.unit_code
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
 ),
-chleb AS (
-  SELECT EXTRACT(YEAR FROM p.date_from)::int AS rok, AVG(p.value::numeric) AS cena_chleba
-  FROM czechia_price p
-  JOIN czechia_price_category c ON p.category_code = c.code
-  WHERE c.name ILIKE '%chléb%' 
-    AND c.price_unit ILIKE '%kg%'
-  GROUP BY EXTRACT(YEAR FROM p.date_from)::int
+wage_unit_any AS (
+    SELECT cp.unit_code
+    FROM czechia_payroll cp
+    WHERE cp.value IS NOT NULL
+      AND cp.value_type_code = (SELECT value_type_code FROM wage_type)
+    GROUP BY cp.unit_code
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
 ),
-jidlo AS (
-  SELECT EXTRACT(YEAR FROM p.date_from)::int AS rok, AVG(p.value::numeric) AS prumerna_cena_jidla
-  FROM czechia_price p
-  GROUP BY EXTRACT(YEAR FROM p.date_from)::int
+wage_unit AS (
+    SELECT COALESCE(
+      (SELECT unit_code FROM wage_unit_pref),
+      (SELECT unit_code FROM wage_unit_any)
+    ) AS unit_code
+),
+wages_by_calc AS (
+    SELECT
+        cp.payroll_year::int AS year,
+        cp.industry_branch_code::text AS industry_branch_code,
+        calc.name AS calculation_name,
+        AVG(cp.value::numeric) AS avg_wage_czk
+    FROM czechia_payroll cp
+    LEFT JOIN czechia_payroll_calculation calc ON calc.code = cp.calculation_code
+    WHERE cp.value IS NOT NULL
+      AND cp.industry_branch_code IS NOT NULL
+      AND cp.value_type_code = (SELECT value_type_code FROM wage_type)
+      AND cp.unit_code       = (SELECT unit_code FROM wage_unit)
+    GROUP BY cp.payroll_year, cp.industry_branch_code, calc.name
+),
+wages_industry AS (
+    -- preferuj "přepočtený", když není, vezmi "fyzický", když ani to není, vezmi jakýkoliv
+    SELECT
+      year,
+      industry_branch_code,
+      COALESCE(
+        MAX(avg_wage_czk) FILTER (WHERE calculation_name ILIKE '%přepočten%'),
+        MAX(avg_wage_czk) FILTER (WHERE calculation_name ILIKE '%fyzick%'),
+        MAX(avg_wage_czk)
+      ) AS avg_wage_czk
+    FROM wages_by_calc
+    GROUP BY year, industry_branch_code
+),
+wages_named AS (
+    SELECT
+      w.year,
+      w.industry_branch_code,
+      ib.name AS industry_branch_name,
+      w.avg_wage_czk
+    FROM wages_industry w
+    JOIN czechia_payroll_industry_branch ib
+      ON ib.code::text = w.industry_branch_code
+),
+wages_all AS (
+    SELECT
+      year,
+      'ALL'::text AS industry_branch_code,
+      'Celkem (vsechna odvetvi)'::text AS industry_branch_name,
+      AVG(avg_wage_czk) AS avg_wage_czk
+    FROM wages_named
+    GROUP BY year
+),
+wages AS (
+    SELECT * FROM wages_named
+    UNION ALL
+    SELECT * FROM wages_all
+),
+prices AS (
+    SELECT
+        EXTRACT(YEAR FROM p.date_from)::int AS year,
+        p.category_code::int AS category_code,
+        pc.name AS category_name,
+        pc.price_value::numeric AS price_value,
+        pc.price_unit::text AS price_unit,
+        AVG(p.value::numeric) AS avg_price_czk
+    FROM czechia_price p
+    JOIN czechia_price_category pc ON pc.code = p.category_code
+    WHERE p.value IS NOT NULL
+      AND p.region_code IS NULL
+    GROUP BY
+        EXTRACT(YEAR FROM p.date_from)::int,
+        p.category_code,
+        pc.name,
+        pc.price_value,
+        pc.price_unit
+),
+common_years AS (
+    SELECT year FROM (SELECT DISTINCT year FROM wages) w
+    INTERSECT
+    SELECT year FROM (SELECT DISTINCT year FROM prices) p
 )
-SELECT 
-    m.rok,
-    m.prumerna_mzda,
-    j.prumerna_cena_jidla,
-    ml.cena_mlika,
-    ch.cena_chleba,
-    ROUND(m.prumerna_mzda / ml.cena_mlika, 1) AS litru_mlika_za_mzdu,
-    ROUND(m.prumerna_mzda / ch.cena_chleba, 1) AS kg_chleba_za_mzdu
-FROM mzdy m
-LEFT JOIN jidlo j ON j.rok = m.rok
-LEFT JOIN mleko ml ON ml.rok = m.rok
-LEFT JOIN chleb ch ON ch.rok = m.rok
-WHERE ml.cena_mlika IS NOT NULL
-  AND ch.cena_chleba IS NOT NULL
-ORDER BY m.rok;
+SELECT
+    cy.year,
+    w.industry_branch_code,
+    w.industry_branch_name,
+    w.avg_wage_czk,
+    p.category_code,
+    p.category_name,
+    p.price_value,
+    p.price_unit,
+    p.avg_price_czk,
+    ROUND((w.avg_wage_czk / NULLIF(p.avg_price_czk, 0))::numeric, 2) AS units_affordable_for_avg_wage
+FROM common_years cy
+JOIN wages  w ON w.year = cy.year
+JOIN prices p ON p.year = cy.year
+ORDER BY cy.year, w.industry_branch_code, p.category_code;
 
 -- 2) Sekundární tabulka
 CREATE TABLE t_tomas_havelec_project_sql_secondary_final AS
-WITH rocni_ceny AS (
-  SELECT 
-    'Česko'::text AS stat,
-    kat.code AS kod_kategorie,
-    kat.name AS kategorie,
-    EXTRACT(YEAR FROM p.date_from)::int AS rok,
-    AVG(p.value::numeric) AS prumerna_cena
-  FROM czechia_price p
-  JOIN czechia_price_category kat ON p.category_code = kat.code
-  GROUP BY kat.code, kat.name, EXTRACT(YEAR FROM p.date_from)::int
+WITH years AS (
+  SELECT DISTINCT year FROM t_tomas_havelec_project_sql_primary_final
 ),
-rust AS (
-  SELECT 
-    stat,
-    kod_kategorie,
-    kategorie,
-    rok,
-    prumerna_cena,
-    LAG(prumerna_cena) OVER (PARTITION BY kod_kategorie ORDER BY rok) AS cena_minuly_rok,
-    CASE
-      WHEN LAG(prumerna_cena) OVER (PARTITION BY kod_kategorie ORDER BY rok) IS NOT NULL
-      THEN ROUND(((prumerna_cena / LAG(prumerna_cena) OVER (PARTITION BY kod_kategorie ORDER BY rok) - 1) * 100)::numeric, 2)
-    END AS rust_procenta
-  FROM rocni_ceny
-),
-ekonomika AS (
+europe AS (
   SELECT
-    e.country   AS stat,
-    e.year      AS rok,
-    e.gdp       AS hdp,
-    e.gini      AS gini,
-    e.population AS populace,
-    ROUND((100 * (e.gdp / NULLIF(LAG(e.gdp) OVER (PARTITION BY e.country ORDER BY e.year), 0) - 1))::numeric, 2) AS rust_hdp_procenta
+    TRIM(e.country)::text AS country,
+    e.year::int AS year,
+    e.gdp::numeric AS gdp,
+    e.gini::numeric AS gini,
+    e.population::numeric AS population,
+    ROUND(
+      (100 * (e.gdp / NULLIF(LAG(e.gdp) OVER (PARTITION BY TRIM(e.country) ORDER BY e.year), 0) - 1))::numeric,
+      2
+    ) AS gdp_yoy_pct
   FROM economies e
-  JOIN countries c ON c.country = e.country
-  WHERE c.continent = 'Europe'
+  JOIN countries c ON TRIM(c.country) = TRIM(e.country)
+  WHERE TRIM(c.continent) = 'Europe'
 )
-SELECT 
-  r.stat,
-  r.kod_kategorie,
-  r.kategorie,
-  r.rok,
-  r.prumerna_cena,
-  r.cena_minuly_rok,
-  r.rust_procenta,
-  e.hdp,
-  e.gini,
-  e.populace,
-  e.rust_hdp_procenta
-FROM rust r
-LEFT JOIN ekonomika e 
-  ON e.rok = r.rok AND e.stat = 'Czech Republic'
-WHERE r.cena_minuly_rok IS NOT NULL
-ORDER BY r.kategorie, r.rok;
+SELECT eu.*
+FROM europe eu
+JOIN years y ON y.year = eu.year
+ORDER BY eu.country, eu.year;
