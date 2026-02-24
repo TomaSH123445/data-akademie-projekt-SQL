@@ -93,6 +93,3 @@ V datech není vidět stabilní a jednoznačný vztah mezi růstem HDP a růstem
 1. Spusť `primarni_tabulka.sql` – vytvoří tabulku `t_tomas_havelec_project_sql_primary_final`.  
 2. Spusť `sekundarni_tabulka.sql` – vytvoří tabulku `t_tomas_havelec_project_sql_secondary_final`.  
 3. Spusť jednotlivé dotazy `otazka_1_*.sql` až `otazka_5_*.sql` 
-
-## Nový dataset na analýzu
-https://www.kaggle.com/datasets/wardabilal/customer-shopping-behaviour-analysis?select=shopping_behavior_updated+%281%29.csv
